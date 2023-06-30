@@ -1,0 +1,19 @@
+div.nav{
+    border: 2px solid black ;
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+}
+.menubar{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+button{
+    background: transparent ;
+    border: 0px ;
+}
+.sun{
+    color : red ;
+    font-size: 30px;
+}
