@@ -1,13 +1,21 @@
-ul{
+ul {
     list-style-type: none;
 }
 
-.add{
-    border: 1px solid #03C75A ; 
+.add {
+    border: 1px solid #03C75A;
     border-radius: 40px;
     margin-left: 10px;
 }
-.mainContainer{
-    padding: 20px;
 
+.mainContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg);
+}
+
+.list {
+    flex: 1 1 auto;
+    overflow-y: scroll;
 }

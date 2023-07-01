@@ -1,19 +1,45 @@
-div.nav{
-    border: 2px solid black ;
+.nav {
     display: flex;
     flex-direction: row;
-    font-size: 14px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-bg-dark);
+    border-bottom: 1px solid var(--color-gray);
+
 }
-.menubar{
+
+.filters {
     display: flex;
-    flex-direction: row;
     list-style-type: none;
 }
-button{
-    background: transparent ;
-    border: 0px ;
+
+button {
+    background: transparent;
+    border: 0px;
+    outline: none;
 }
-.sun{
-    color : red ;
-    font-size: 30px;
+
+.filter {
+    font-size: 1.4rem;
+    margin: 0.3rem;
+    text-transform: capitalize;
+    background-color: transparent;
+    color: var(--color-accent);
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+.filter:hover {
+    opacity: 1;
+}
+
+.filter.selected {
+    opacity: 1;
+}
+
+.filter.selected::after {
+    content: '';
+    display: block;
+    margin-top: 0.2rem;
+    border: 1px solid var(--color-text);
 }
