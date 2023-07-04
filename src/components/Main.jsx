@@ -1,27 +1,35 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Main.module.css';
 import AddTodo from './AddTodo/AddTodo';
 import Todo from './Todo';
 
-import { v4 as uuidv4 } from 'uuid';
-
 
 
 export default function Main({ filter }) {
-    const [todo, setTodo] = useState([
-        { key: 1, type: 'Weekly', name: '리액트 공부하기', done: false },
-        { key: 2, type: 'Weekly', name: '포트폴리오 준비', done: false }
-    ]);
-    const name = useRef('');
-    const type = useRef('');
 
-    const handleAdd = () => {
-        // 새로운 todo 를 업데이트 해야함 
-        const new_todo = { key: uuidv4(), type: type.current.value, name: name.current.value, done: false };
-        console.log(new_todo);
-        setTodo((todos) => [...todos, new_todo]);
-        name.current.value = '';
-    };
+    const [todo, setTodo] = useState(readlocaltodo);
+    // * 주의할 점 => const [todo, setTodo] = useState(readlocaltodo());
+    //   위와 같이 하면, 위의 함수가 계속해서 실행됨. 예를 들어, change가 될 때마다 , 해당함수가 실행됨 
+    //   이를 해결하기 위해서 , const [todo, setTodo] = useState(readlocaltodo); 
+    //   또는 
+    //   const [todo, setTodo] = useState( ()=>( realocaltodo() ) );
+    //   해줌으로써 해결 할 수 있다. 
+
+    // const name = useRef('');
+    // const type = useRef('');
+
+    // const handleAdd = () => {
+    //     // 새로운 todo 를 업데이트 해야함 
+    //     const new_todo = { key: uuidv4(), type: type.current.value, name: name.current.value, done: false };
+    //     console.log(new_todo);
+    //     setTodo((todos) => [...todos, new_todo]);
+    //     name.current.value = '';
+    // };
+
+    useEffect(() => {
+        localStorage.setItem('todo', JSON.stringify(todo));
+    }, [todo]);
+
 
     const handleAdd2 = (todo) => {
         // console.log(todo);
@@ -34,7 +42,7 @@ export default function Main({ filter }) {
         setTodo(todo.filter((t) => t.key !== deleted.key));
     };
     const filtered = getfilteredtodo(todo, filter);
-    console.log(filtered);
+    // console.log(filtered);
     return (
         <div className={styles.mainContainer}>
             <ul className={styles.list}>
@@ -59,6 +67,13 @@ export default function Main({ filter }) {
             <button className={styles.add} onClick={handleAdd}>Add2</button> */}
         </div>
     );
+}
+function readlocaltodo() {
+    // console.log(' 하이하이 ');
+    const todo = localStorage.getItem('todo');
+    // console.log(' todo 는 : ' + todo);
+    if (todo === 'undefined') return [];
+    else return JSON.parse(todo);
 }
 
 function getfilteredtodo(todo, filter) {
