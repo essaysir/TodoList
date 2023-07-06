@@ -41,7 +41,8 @@ export default function Main({ filter }) {
     const handleDelete = (deleted) => {
         setTodo(todo.filter((t) => t.key !== deleted.key));
     };
-    const filtered = getfilteredtodo(todo, filter);
+    const filtered = getfilteredtodo(todo, filter) || [];
+
     // console.log(filtered);
     return (
         <div className={styles.mainContainer}>
@@ -86,5 +87,5 @@ function getfilteredtodo(todo, filter) {
     else if (filter === 'done') {
         return todo.filter(todo => todo.done === true);
     }
-
+    return todo;
 };
