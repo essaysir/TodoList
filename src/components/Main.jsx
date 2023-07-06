@@ -86,5 +86,5 @@ function getfilteredtodo(todo, filter) {
     else if (filter === 'done') {
         return todo.filter(todo => todo.done === true);
     }
-    return todo;
+
 };
